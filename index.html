@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мой сайт — личный бренд и проекты</title>
+  <meta name="description" content="Личная страница с проектами, услугами и контактами." />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #050816;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Шапка */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 8, 22, 0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #42a5ff, #ff7af5);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Контейнер */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+      min-height: calc(100vh - 64px);
+      padding: 40px 0 60px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3.3vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(120deg, #42a5ff, #ff7af5, #ffe57f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      max-width: 520px;
+      opacity: 0.85;
+      margin-bottom: 18px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .hero-tag {
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.75rem;
+      opacity: 0.85;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #42a5ff, #ff7af5);
+      color: #050816;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      padding: 20px 18px;
+      background: radial-gradient(circle at top left, rgba(66, 165, 255, 0.25), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(255, 122, 245, 0.25), transparent 55%),
+                  #070b1f;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      min-height: 260px;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.75;
+      margin-bottom: 6px;
+    }
+
+    .hero-card-title {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .hero-card-sub {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 16px;
+    }
+
+    .hero-list {
+      list-style: none;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      margin-bottom: 18px;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      margin-top: 6px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, #42a5ff, #ff7af5);
+      flex-shrink: 0;
+    }
+
+    .hero-pill {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .hero-pill strong {
+      opacity: 1;
+    }
+
+    .hero-card-footer {
+      position: absolute;
+      inset-inline: 18px;
+      bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+
+    .dot-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    .dot-small {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    .dot-small.filled {
+      background: #f5f5f5;
+    }
+
+    /* Секции */
+    section {
+      padding: 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-bottom: 22px;
+      max-width: 520px;
+    }
+
+    /* Блок "Обо мне" */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 28px;
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+      opacity: 0.88;
+    }
+
+    .about-text p + p {
+      margin-top: 12px;
+    }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+
+    .fact-card {
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .fact-label {
+      font-size: 0.75rem;
+      opacity: 0.6;
+      margin-bottom: 2px;
+    }
+
+    .fact-value {
+      font-size: 0.9rem;
+    }
+
+    /* Проекты / услуги */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.85rem;
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .card-text {
+      opacity: 0.85;
+      font-size: 0.82rem;
+    }
+
+    .card-meta {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    .card-link {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-link span {
+      font-size: 1rem;
+      transform: translateY(1px);
+    }
+
+    /* Контакты */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact-text {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 16px;
+    }
+
+    .contact-list {
+      list-style: none;
+      font-size: 0.85rem;
+    }
+
+    .contact-list li + li {
+      margin-top: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 10px;
+    }
+
+    .small-input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+    }
+
+    .small-input-row input {
+      flex: 1;
+      min-width: 120px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      color: #f5f5f5;
+      outline: none;
+      font-size: 0.8rem;
+    }
+
+    .small-input-row input::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .small-input-row button {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: rgba(255,255,255,0.06);
+      color: #f5f5f5;
+    }
+
+    .small-input-row button:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .social-pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Футер */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 20px 26px;
+      font-size: 0.75rem;
+      opacity: 0.65;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Адаптив */
+    @media (max-width: 860px) {
+      .hero,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 30px;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .container {
+        padding-inline: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo-text">MySite</div>
+      <nav class="nav-links">
+        <a href="#about">Обо мне</a>
+        <a href="#projects">Проекты</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div>
+          <h1 class="hero-title">
+            Привет, я <span class="hero-gradient">Создатель этого сайта</span>
+          </h1>
+          <p class="hero-subtitle">
+            Здесь можно рассказать о себе, своих проектах, услугах или идеях. Сайт сделан так, чтобы его
+            было легко адаптировать под личный бренд, портфолио или лендинг.
+          </p>
+
+          <div class="hero-tags">
+            <span class="hero-tag">Личный бренд</span>
+            <span class="hero-tag">Проекты и кейсы</span>
+            <span class="hero-tag">Контакты в одном месте</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">
+              Посмотреть проекты →
+            </button>
+            <button class="btn-secondary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+              Написать мне
+            </button>
+          </div>
+
+          <p class="hero-note">
+            ✏️ Подправь текст, заголовки и контакты под себя — и сайт готов к публикации.
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-label="Краткая карточка о себе">
+          <div class="badge">Кратко обо мне</div>
+          <div class="hero-card-title">Имя Фамилия</div>
+          <div class="hero-card-sub">То, чем вы занимаетесь — дизайнер, маркетолог, автор, разработчик, предприниматель.</div>
+
+          <ul class="hero-list">
+            <li>
+              <span class="dot"></span>
+              <span>Помогаю людям и компаниям решать задачи через понятный дизайн, структурный подход и внимание к деталям.</span>
+            </li>
+            <li>
+              <span class="dot"></span>
+              <span>Работаю с digital-проектами, визуальной айдентикой, контентом и продуктами «под ключ».</span>
+            </li>
+          </ul>
+
+          <p class="hero-pill">
+            Сейчас <strong>открыт к новым проектам</strong> и интересным сотрудничествам.
+          </p>
+
+          <div class="hero-card-footer">
+            <span>Доступен онлайн</span>
+            <div class="dot-group" aria-hidden="true">
+              <span class="dot-small filled"></span>
+              <span class="dot-small"></span>
+              <span class="dot-small"></span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <h2 class="section-title">Обо мне</h2>
+        <p class="section-subtitle">
+          Здесь можно коротко описать свой опыт, подход к работе и темы, которыми вы вдохновляетесь.
+          Сделайте текст живым, но ёмким.
+        </p>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Я занимаюсь тем, что помогает людям и бизнесу выглядеть и работать лучше в цифровой среде.
+              В проектах люблю сочетать стратегию, визуал и понятный пользовательский опыт.
+            </p>
+            <p>
+              За счёт аккуратной структуры и простого языка стараюсь делать сложные вещи прозрачными,
+              а идеи — реализуемыми. В основе работы — диалог, здравый смысл и внимание к деталям.
+            </p>
+          </div>
+
+          <div class="about-facts">
+            <div class="fact-card">
+              <div class="fact-label">Опыт</div>
+              <div class="fact-value">N+ лет в цифровых проектах</div>
+            </div>
+            <div class="fact-card">
+              <div class="fact-label">Формат</div>
+              <div class="fact-value">Проекты, консультации, сопровождение</div>
+            </div>
+            <div class="fact-card">
+              <div class="fact-label">Фокус</div>
+              <div class="fact-value">Личный бренд, продукты, сервисы</div>
+            </div>
+            <div class="fact-card">
+              <div class="fact-label">Гео</div>
+              <div class="fact-value">Работаю онлайн, клиенты из разных стран</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS / SERVICES -->
+      <section id="projects">
+        <h2 class="section-title">Проекты и форматы работы</h2>
+        <p class="section-subtitle">
+          Несколько направлений, с которыми я работаю чаще всего. Замените описания на свои реальные услуги и кейсы.
+        </p>
+
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card-label">Формат 01</div>
+            <div class="card-title">Лэндинги и сайты</div>
+            <p class="card-text">
+              Создаю простые и понятные сайты под конкретную задачу: презентация продукта, личная страница,
+              лендинг для услуги или курса.
+            </p>
+            <p class="card-meta">
+              Результат: аккуратный сайт с фокусом на смыслы и удобство пользователя.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-label">Формат 02</div>
+            <div class="card-title">Личный бренд и визуал</div>
+            <p class="card-text">
+              Помогаю оформить личный бренд: структура, ключевые сообщения, визуальный стиль для соцсетей,
+              сайта и презентаций.
+            </p>
+            <p class="card-meta">
+              Можно начинать с небольшой сессии, а затем углубляться.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-label">Формат 03</div>
+            <div class="card-title">Консультации и разборы</div>
+            <p class="card-text">
+              Точечная помощь: разбор сайта, профиля, упаковки продукта или контента. Чёткая обратная связь
+              в формате созвона или письменного разбора.
+            </p>
+            <p class="card-meta">Подойдёт, если уже есть базовый продукт, но хочется «усилить».</p>
+          </article>
+
+          <article class="card">
+            <div class="card-label">Кейсы</div>
+            <div class="card-title">Пример проекта</div>
+            <p class="card-text">
+              Здесь можно кратко описать один из своих проектов: задачу, подход и результат.
+            </p>
+            <a class="card-link" href="#contact">
+              Обсудить подобный проект <span>↗</span>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2 class="section-title">Контакты</h2>
+        <p class="section-subtitle">
+          Напишите удобным способом — коротко расскажите о задаче, сроках и формате, который вам интересен.
+        </p>
+
+        <div class="contact-grid">
+          <div>
+            <div class="pill">Открыт к новым проектам</div>
+            <p class="contact-text">
+              Лучше всего описать, что именно вам сейчас нужно: сайт, оформление, консультация или что-то ещё.
+              Я отвечу, уточню детали и предложу следующий шаг.
+            </p>
+
+            <ul class="contact-list">
+              <li>
+                📧 Email:
+                <a href="mailto:you@example.com">you@example.com</a>
+              </li>
+              <li>
+                💬 Telegram:
+                <a href="https://t.me/yourusername" target="_blank" rel="noreferrer">@yourusername</a>
+              </li>
+            </ul>
+
+            <div class="social-row">
+              <span class="social-pill">LinkedIn / Behance / Dribbble — добавьте ссылки</span>
+              <span class="social-pill">Можно указать сайт или портфолио</span>
+            </div>
+          </div>
+
+          <div>
+            <p style="font-size:0.8rem; opacity:0.8; margin-bottom:8px;">
+              Небольшая форма-заглушка для e-mail-рассылки или быстрой связи. Замените на интеграцию сервиса форм
+              (Google Forms, Tally, Typeform) или уберите блок.
+            </p>
+            <div class="small-input-row">
+              <input type="email" placeholder="Ваш e-mail" />
+              <button type="button">Отправить</button>
+            </div>
+            <p style="font-size:0.7rem; opacity:0.6;">
+              Нажимая на кнопку, вы можете указать здесь текст об обработке данных или оставить краткий дисклеймер.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© <span id="year"></span> Мой сайт. Все права защищены.</span>
+      <span>Сделано без кода и бесплатно — можно развернуть на GitHub Pages.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Автоматическое обновление года в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
